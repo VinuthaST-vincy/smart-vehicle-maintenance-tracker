@@ -1,5 +1,8 @@
 package com.smartvehicle.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Vehicle {
 
     // Encapsulation: Private variables
@@ -8,6 +11,9 @@ public class Vehicle {
     private String model;
     private int year;
     private String ownerName;
+
+    // Step 4: Composition – Vehicle HAS a list of service records
+    private List<ServiceRecord> serviceHistory = new ArrayList<>();
 
     // Default Constructor
     public Vehicle() {
@@ -70,6 +76,14 @@ public class Vehicle {
 
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
+    }
+
+    public void addServicesRecord(ServiceRecord record) {
+        serviceHistory.add(record);
+    }
+
+    public List<ServiceRecord> getServiceHistory() {
+        return serviceHistory;
     }
 
     // Utility method

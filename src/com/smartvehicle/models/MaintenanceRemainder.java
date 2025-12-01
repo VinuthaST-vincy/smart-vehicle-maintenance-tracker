@@ -4,24 +4,25 @@ import java.time.LocalDate;
 
 public class MaintenanceRemainder {
 
-    private String message;
-    private LocalDate dueDate;
+    private String vin; // vehicle VIN
+    private LocalDate dueDate; // next service date
+    private String message; // reminder message
 
-    public MaintenanceRemainder(String message, LocalDate dueDate) {
-        this.message = message;
+    public MaintenanceRemainder(String vin, LocalDate dueDate, String message) {
+        this.vin = vin;
         this.dueDate = dueDate;
+        this.message = message;
     }
 
-    public String getMessage() {
-        return message;
+    public String getVin() {
+        return vin;
     }
 
     public LocalDate getDueDate() {
         return dueDate;
     }
 
-    @Override
-    public String toString() {
-        return message + " | Due: " + dueDate;
+    public String getMessage() {
+        return message;
     }
 }

@@ -7,31 +7,12 @@ import com.smartvehicle.api.VinLookupService;
 import com.smartvehicle.exceptions.InvalidVinException;
 import com.smartvehicle.models.Vehicle;
 
-/**
- * VehicleManager Class
- * -----------------------------------------
- * This class manages all vehicle operations:
- * - Adding vehicles
- * - Searching vehicles
- * - Fetching details using VIN API
- * - Displaying all vehicles
- *
- * This demonstrates:
- * ✔ Collection (ArrayList)
- * ✔ Encapsulation
- * ✔ Composition (VehicleManager uses VIN Lookup)
- * ✔ Abstraction (Hides internal logic from main class)
- */
-
 public class VehicleManager {
 
-    // List to store vehicle objects
-    // vehicleList is private and accessed only through methods(Encapsulation)
-    // Collections framework(List,Vehicle> vehicleList = new ArrayList<>();)
+    // List to store vehicles
     private List<Vehicle> vehicleList = new ArrayList<>();
 
-    // Composition: VehicleManager uses VinLookupService
-    // The user does not seehow VIN Lookup works internally(Abstraction)
+    // VIN Lookup service (Composition)
     private VinLookupService vinService = new VinLookupService();
 
     /**
@@ -44,27 +25,32 @@ public class VehicleManager {
 
     /**
      * Method 2: Add a vehicle using VIN Lookup API
-     * This method fetches vehicle details using the VIN
+     * STEP 5.2 IMPLEMENTED ✔
      */
-    public void addVehicle(String vin) {
+    public Vehicle addVehicleUsingVIN(String vin) {
         try {
             // Fetch details from simulated VIN API
             Vehicle v = vinService.fetchVehicleDetails(vin);
+
+            // Add to list
             vehicleList.add(v);
 
-            System.out.println("Vehicle added via VIN Lookup!");
+            System.out.println("Vehicle added using VIN Lookup!");
+            return v;
+
         } catch (InvalidVinException e) {
             System.out.println("Error: " + e.getMessage());
+            return null;
         }
     }
 
     /**
-     * Method 3: Search vehicle by VIN
+     * Search vehicle by VIN
      */
     public Vehicle searchByVin(String vin) {
         for (Vehicle v : vehicleList) {
             if (v.getVin().equals(vin)) {
-                return v; // Vehicle found
+                return v;
             }
         }
         System.out.println("Vehicle not found!");
@@ -72,7 +58,7 @@ public class VehicleManager {
     }
 
     /**
-     * Method 4: Display all stored vehicles
+     * Display all stored vehicles
      */
     public void displayAllVehicles() {
         if (vehicleList.isEmpty()) {

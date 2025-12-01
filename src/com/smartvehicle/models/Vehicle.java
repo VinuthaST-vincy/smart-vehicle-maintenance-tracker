@@ -1,6 +1,7 @@
 package com.smartvehicle.models;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Vehicle {
@@ -11,8 +12,18 @@ public class Vehicle {
     private String model;
     private int year;
     private String ownerName;
+    private LocalDate nextServiceDate;
 
-    // Step 4: Composition – Vehicle HAS a list of service records
+    // getter and setter
+    public LocalDate getNextServiceDate() {
+        return nextServiceDate;
+    }
+
+    public void setNextServiceDate(LocalDate nextServiceDate) {
+        this.nextServiceDate = nextServiceDate;
+    }
+
+    // Composition – Vehicle HAS a list of service records
     private List<ServiceRecord> serviceHistory = new ArrayList<>();
 
     // Default Constructor
